@@ -13,9 +13,9 @@ export const themeSlice = createSlice({
         special: "#e64a5c",
       },
     },
-    // Spanish by default
+    // English by default
     language: {
-      isSpanish: true,
+      isSpanish: false,
       text: {
         title: "Organize your day",
         inputTitle: "New task title",
@@ -27,8 +27,9 @@ export const themeSlice = createSlice({
     },
   },
   reducers: {
+    // Change from dark to light theme
     toggleTheme: (state) => {
-      state.theme.isDark = !state.theme.isDark;
+      state.theme.isDark = !state.theme.isDark; // Reverse the Boolean Value
       state.theme.colors = state.theme.isDark
         ? {
             primary: "#121212",
@@ -43,6 +44,7 @@ export const themeSlice = createSlice({
             special: "red",
           };
     },
+    // Change from spanish to english
     toggleLanguage: (state) => {
       state.language.isSpanish = !state.language.isSpanish;
       state.language.text = state.language.isSpanish

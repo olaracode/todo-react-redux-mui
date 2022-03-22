@@ -1,13 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const counterSlice = createSlice({
+export const todoSlice = createSlice({
   name: "todo",
   initialState: {
+    // It starts with one item for the example todo
     list: [
       {
         name: "Title",
         description: "Description",
-        id: Math.floor(Math.random() * 10000),
+        id: Math.floor(Math.random() * 10000), // Generate random number for ID
       },
     ],
   },
@@ -16,7 +17,7 @@ export const counterSlice = createSlice({
       let newTodo = {
         name: action.payload.name,
         description: action.payload.description,
-        id: Math.floor(Math.random() * 10000),
+        id: Math.floor(Math.random() * 10000), // Generate random number for ID
       };
       state.list = [...state.list, newTodo];
     },
@@ -26,6 +27,6 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const { increment, decrement } = todoSlice.actions;
 
-export default counterSlice.reducer;
+export default todoSlice.reducer;

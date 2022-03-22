@@ -18,11 +18,14 @@ import { toggleTheme, toggleLanguage } from "./store/themeSlice";
 
 function App() {
   const dispatch = useDispatch();
+
+  // Fetch Data from the STORE
   const todo = useSelector((state) => state.todo.list);
   const theme = useSelector((state) => state.setup.theme);
   const language = useSelector((state) => state.setup.language);
   const [textLanguage, setTextLanguage] = useState("English");
 
+  // Set the the current language
   const handleTranslate = (e) => {
     if (e.target.value !== textLanguage) {
       setTextLanguage(e.target.value);
@@ -41,6 +44,7 @@ function App() {
             color: theme.colors.text,
           }}
         >
+          {/* TOP ACTIONS: [SET THEME, SET LANGUAGE] */}
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Box sx={{ display: "flex", alignItems: "center" }}>
               {theme.isDark ? (
@@ -62,6 +66,7 @@ function App() {
               <ToggleButton value={"Spanish"}>ES</ToggleButton>
             </ToggleButtonGroup>
           </Box>
+          {/* CLOSE ACTIONS */}
 
           <TodoHeader />
           <List sx={{ paddingTop: "50px" }}>

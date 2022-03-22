@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./counterSlice";
+import todoReducer from "./todoSlice";
 import themeReducer from "./themeSlice";
 export default configureStore({
   reducer: {
-    todo: counterReducer,
+    todo: todoReducer,
     setup: themeReducer,
   },
 });
