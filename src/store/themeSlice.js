@@ -39,9 +39,9 @@ export const themeSlice = createSlice({
           }
         : {
             primary: "#fafafa",
-            secondary: "#f0f7ff",
+            secondary: "#dbdbdb",
             text: "black",
-            special: "red",
+            special: "#e64a5c",
           };
     },
     // Change from spanish to english
