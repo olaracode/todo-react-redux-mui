@@ -1,61 +1,97 @@
 import React, { useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
-import { Box, Paper, TextField, IconButton } from "@mui/material";
+import { Box, Paper, TextField, Button, Grid, Alert } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { increment } from "../store/counterSlice";
+import { useSelector } from "react-redux";
 
 const TodoHeader = () => {
   const dispatch = useDispatch();
-  const [newTodo, setTodo] = useState("");
+  const [todoTitle, setTitle] = useState("");
+  const [todoDescription, setDescription] = useState("");
+  const [error, setError] = useState(false);
+  const theme = useSelector((state) => state.setup.theme);
+  const language = useSelector((state) => state.setup.language);
+
   const handleAdd = (e) => {
     e.preventDefault();
-    let currentTime = new Date().toDateString();
-    let addTodo = {
-      name: newTodo,
-      time: currentTime,
-    };
-    setTodo("");
-    dispatch(increment(addTodo));
+    if (todoTitle.length > 4 && todoDescription.length > 8) {
+      let addTodo = {
+        name: todoTitle,
+        description: todoDescription,
+      };
+      setTitle("");
+      setDescription("");
+      dispatch(increment(addTodo));
+      setError(false);
+    } else {
+      setError(true);
+    }
   };
+
   const handleEnter = (e) => {
     if (e.key === "enter" || e.key === "Enter") {
       handleAdd(e);
     }
   };
+
   return (
     <>
       <Box sx={{ textAlign: "center" }}>
-        <h1 sx={{}}>Organizate</h1>
+        <h1 sx={{}}>{language.text.title}</h1>
       </Box>
-      <Paper
-        sx={{
-          display: "flex",
-          backgroundColor: "#1a2027",
-          alignItems: "center",
-        }}
-      >
+      <form>
         <TextField
-          label="Add new ToDo"
+          label={language.text.inputTitle}
           size="large"
-          value={newTodo}
+          value={todoTitle}
           sx={{
             width: 1,
-            color: "white",
+            paddingBottom: "15px",
+            color: theme.colors.text,
             input: {
-              color: "white",
-              border: "none",
+              color: theme.colors.text,
+              border: "0px",
             },
           }}
           InputLabelProps={{
-            style: { color: "#fff" },
+            style: { color: theme.colors.text },
           }}
-          onChange={(e) => setTodo(e.target.value)}
+          onChange={(e) => setTitle(e.target.value)}
           onKeyDown={(e) => handleEnter(e)}
         />
-        <IconButton onClick={(e) => handleAdd(e)}>
-          <SendIcon sx={{ color: "white" }} />
-        </IconButton>
-      </Paper>
+        <TextField
+          label={language.text.inputDescription}
+          size="large"
+          value={todoDescription}
+          sx={{
+            width: 1,
+            paddingBottom: "15px",
+            color: theme.colors.text,
+            input: {
+              color: theme.colors.text,
+              border: "0px",
+            },
+          }}
+          InputLabelProps={{
+            style: { color: theme.colors.text },
+          }}
+          onChange={(e) => setDescription(e.target.value)}
+          onKeyDown={(e) => handleEnter(e)}
+        />
+        {error ? (
+          <Alert severity="error" onClose={() => setError(false)}>
+            {`${language.text.noTasks}`}
+          </Alert>
+        ) : null}
+        <Grid container sx={{ justifyContent: "flex-end", paddingY: "10px" }}>
+          <Grid item>
+            <Button onClick={(e) => handleAdd(e)} variant={"contained"}>
+              <SendIcon sx={{ color: theme.colors.text, paddingX: "10px" }} />
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
     </>
   );
 };

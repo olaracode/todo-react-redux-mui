@@ -7,9 +7,22 @@ body {
   padding: 0px;
 }
 .main {
-  background-image: url("./img/dark.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   min-height: 100vh;
+}
+
+.dark {
+  background-image: url("./img/dark.jpg");
+}
+.clear {
+  background-image: url("./img/clear.jpg");
+}
+button.MuiToggleButton-root {
+  color: white;
+}
+button.MuiToggleButton-root.Mui-selected {
+  background-color: #1a2027 !important;
+  color: white;
 }

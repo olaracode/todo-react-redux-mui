@@ -7,10 +7,12 @@ import {
   IconButton,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { decrement } from "../store/counterSlice";
+
 const Item = (props) => {
   const dispatch = useDispatch();
+  const theme = useSelector((state) => state.setup.theme);
   const handleDelete = (id) => {
     dispatch(decrement(id));
   };
@@ -19,18 +21,18 @@ const Item = (props) => {
       <ListItem
         sx={{
           borderRadius: "10px",
-          backgroundColor: "#1a2027",
+          backgroundColor: theme.colors.secondary,
           justifyContent: "center",
         }}
       >
         <ListItemText
           primary={props.text}
           secondary={props.secondary}
-          secondaryTypographyProps={{ color: "#ed5d5b" }}
+          secondaryTypographyProps={{ color: theme.colors.special }}
         />
         <ListItemIcon>
-          <IconButton onClick={() => handleDelete(props.id)}>
-            <DeleteIcon sx={{ color: "#e64a5c" }} />
+          <IconButton onClick={() => handleDelete(props.id)} color="error">
+            <DeleteIcon />
           </IconButton>
         </ListItemIcon>
       </ListItem>

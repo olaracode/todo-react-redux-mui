@@ -6,7 +6,7 @@ export const counterSlice = createSlice({
     list: [
       {
         name: "Title",
-        time: "Description",
+        description: "Description",
         id: Math.floor(Math.random() * 10000),
       },
     ],
@@ -15,7 +15,7 @@ export const counterSlice = createSlice({
     increment: (state, action) => {
       let newTodo = {
         name: action.payload.name,
-        time: action.payload.time,
+        description: action.payload.description,
         id: Math.floor(Math.random() * 10000),
       };
       state.list = [...state.list, newTodo];
